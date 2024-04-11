@@ -15,7 +15,10 @@ import java.util.Set;
 //HashMap: Luu cap key-value va cac cap key 0 trung
 //LinkedHashMap: Luu thu tu put cac cap key-value
 //TreeMap: Sap sep theo key tang dan
-//Duyet map phai trong qua entry set
+//Moi cap kkey-value la 1 entry, neu muon duyet thi phai dung entrySet
+//entrySet la 1 cach dung de chuyen map ve set, chuyen ve set thi se lap duoc
+//getKey(), getvalue() là 2 phương thức của entrySet()
+
 public class Learn {
 
     public static void main(String[] args) {
@@ -32,9 +35,23 @@ public class Learn {
                 map.put(x, 1);
             }
         }
+
         Set<Map.Entry<Integer, Integer>> entry = map.entrySet(); // Lay ve entryset cua map
         for (Map.Entry<Integer, Integer> x : entry) {
             System.out.println(x.getKey() + " " + x.getValue());
+        }
+
+        // Sắp xếp lại map theo tần suất xuất hiện giảm dần
+        List<Map.Entry<Integer, Integer>> entry = new LinkedList<>(map.entrySet());
+        //LinkedList ở trên được sử dụng để lưu trữ một danh sách các entry 
+        //từ Map. Mỗi entry là một cặp key-value được biểu diễn dưới dạng Map.Entry<Integer, Integer>
+        Collections.sort(entry, new Comparator<Map.Entry<Integer, Integer>>(){
+           public int compare(Map.Entry<Integer, Integer> m1, Map.Entry<Integer, Integer> m2){
+               return m2.getValue() - m1.getValue();
+           } 
+        });
+        for(Map.Entry<Integer, Integer> it : entry){
+            System.out.println(it.getKey() + " " + it.getValue());
         }
     }
 }
