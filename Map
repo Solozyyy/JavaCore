@@ -1,14 +1,4 @@
-import java.util.Scanner;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
-import java.util.Set;
+import java.util.*;
 
 //Khai bao nhu ArrayList
 //put(key, value), getKey(key), getValue(Value), size(), isEmpty(), containsKey(key), containsValue(value), remove(key)
