@@ -11,11 +11,12 @@ import java.util.TreeMap;
 import java.util.Set;
 
 //Khai bao nhu ArrayList
-//put(key, value), getKey(key), getValue(Value), size(), isEmpty(), containsKey(key), containsValue(value), remove(key)
+//put(key, value), get(key), size(), isEmpty(), containsKey(key), containsValue(value), remove(key)
 //HashMap: Luu cap key-value va cac cap key 0 trung
 //LinkedHashMap: Luu thu tu put cac cap key-value
 //TreeMap: Sap sep theo key tang dan
 //Duyet map phai trong qua entry set
+//Có thể lấy value và key ra thông qua map.Entry<... , ...>, getKey(), getValue()
 public class Learn {
 
     public static void main(String[] args) {
