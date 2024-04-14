@@ -1,0 +1,56 @@
+package basic;
+
+import java.util.Scanner;
+import java.util.*;
+
+//STACK
+//size()
+//peek(): Lay ra phan tu dau tien
+//pop(): Xoa phan tu o dinh
+//empty(): Kiem tra rong
+//search(num): Tim vi tri cua 1 phan tu trong stack
+
+
+//QUEUE
+//add(): Them phan tu 
+//peek(): Lay phan tu o dau
+//poll(): Vua lay ve vua xoa phan tu o dau
+//size(): Lay kich co
+//isEmpty(): Kiem tra rong hay ko
+//length(): return do dai
+//Queue<String> q = new LinkedList<>();
+//        q.add("6");
+//        q.add("8");
+//        while(q.size() < 10){
+//            String top = q.poll();
+//            System.out.print(top + " ");
+//            q.add(top + "6");
+//            q.add(top + "8");
+//        }
+
+
+//PriorityQueue
+//add(): Them
+//peek(): Lay ra phan tu dau
+//remove(): Xoa phan tu nho nhat(lon nhat)
+//Muon lay phan tu dau tien la lon nhat thi dung Comparator
+//poll(): Lay va xoa
+
+public class Learn{
+    public static void main(String[] args){
+        Comparator<Integer> cmp = new Comparator<Integer>(){
+            public int compare(Integer o1, Integer o2){
+                return o2 - o1;
+            }
+        };
+        Scanner sc = new Scanner(System.in);
+        PriorityQueue<Integer> q = new PriorityQueue<>(cmp);
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(-1);
+        System.out.println(q.peek());
+        q.remove();
+        System.out.println(q.peek());
+    }
+}
