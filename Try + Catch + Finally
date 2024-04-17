@@ -1,0 +1,28 @@
+package basic;
+
+import java.util.Scanner;
+import java.util.*;
+
+//Xử lý ngoại lệ 
+//try{
+//    System.out.println(n / m);
+//}catch(InputMismatchException ex){
+//    ex.printStackTrace();
+//}finally{
+//    System.out.println("Ket thuc");
+//}
+
+public class Learn{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        try{
+            System.out.println(n / m);
+        }catch(InputMismatchException ex){
+            ex.printStackTrace();
+        }finally{
+            System.out.println("Ket thuc");
+        }
+    }
+}
