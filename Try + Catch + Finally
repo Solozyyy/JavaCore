@@ -12,6 +12,16 @@ import java.util.*;
 //    System.out.println("Ket thuc");
 //}
 
+hoặc
+try{
+//            System.out.println(n / m);
+//        }catch(Exception ex){
+//            //ex.printStackTrace();
+//            System.out.println(ex.getMessage());
+//        }finally{
+//            System.out.println("Ket thuc");
+//        }
+
 public class Learn{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
