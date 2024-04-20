@@ -25,8 +25,10 @@ public class Learn{
             sv[i] = new Sinhvien(i + 1, ten, lop, chuanHoa(ngaySinh), gpa);        
         }
         for(int i = 0; i < n; ++i){
-            System.out.println(sv[i].getId() + " " + sv[i].getName() + " " 
-            + sv[i].getBirth() + " " + sv[i].getGrade() + " " + sv[i].getGpa());
+            System.out.print(sv[i].getId() + " " + sv[i].getName() + " " 
+            + sv[i].getBirth() + " " + sv[i].getGrade() + " ");
+            System.out.printf("%.2f", sv[i].getGpa());
+            System.out.println("");
         }
     }
 }
