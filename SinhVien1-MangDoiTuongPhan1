@@ -1,0 +1,73 @@
+package basic1;
+
+import java.util.*;
+//import basic2.Person2;
+
+public class Learn{
+    public static String chuanHoa(String s){
+        StringBuilder sb = new StringBuilder(s);
+        if(sb.charAt(1) == '/') sb.insert(0, "0");
+        if(sb.charAt(4) == '/') sb.insert(3, "0");
+        return sb.toString();
+    }
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();        
+        Sinhvien[] sv = new Sinhvien[n];        
+        for(int i = 0; i < n; ++i){            
+            sc.nextLine();
+            String ten = sc.nextLine();
+            String lop = sc.nextLine();
+            String ngaySinh = sc.nextLine();
+            //double thì phải nhập dấu ","
+            double gpa = sc.nextDouble();
+            sv[i] = new Sinhvien(i + 1, ten, lop, chuanHoa(ngaySinh), gpa);        
+        }
+        for(int i = 0; i < n; ++i){
+            System.out.println(sv[i].getId() + " " + sv[i].getName() + " " 
+            + sv[i].getBirth() + " " + sv[i].getGrade() + " " + sv[i].getGpa());
+        }
+    }
+}
+
+//Bên class Sinhvien
+
+package basic1;
+
+import java.util.*;
+
+public class Sinhvien {
+    private String id;
+    private String name;
+    private String birth;
+    private String grade;
+    private double gpa;
+    public Sinhvien(int id, String name, String birth, String grade, double gpa){
+        String s = "";
+        if(id < 10) s += "SV00" + id;
+        else s += "SV0" + id;
+        this.id = s;
+        this.name = name;
+        this.birth = birth;
+        this.grade = grade;
+        this.gpa = gpa;
+    }
+
+    ///getter
+    public String getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getBirth() {
+        return birth;
+    }
+    public String getGrade() {
+        return grade;
+    }
+    public double getGpa() {
+        return gpa;
+    }
+}
