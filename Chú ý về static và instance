@@ -1,0 +1,33 @@
+package basic2;
+
+public class Person {
+    //static variable = class variable: Được chia sẻ bởi mọi object trong class
+    //instance variable
+    private static int x; // x dùng chung cho mọi đối tượng của class Person
+    private int y; // instance variable: 1 đối tượng cụ thể của 1 lớp nào đó
+    
+    public int getX(){
+        return x;
+    }
+    
+    public int getY(){
+        return y;
+    }
+    
+    public void setX(int X){
+        x = X;
+    }
+    
+    public static void xinChao(){
+        System.out.println("oi oi oi");
+    }
+    // Có thể tạo 1 hàm sử dụng được mà không cần thông qua đối tượng cụ thể nào đó
+    // Ví dụ xây dựng 1 class StringUtility với các phương thức là hàm có static thì 
+    // khi cần sử dụng chỉ cần StringUtility.phuong_thuc như các class có sẵn như Math...
+    // Note: Phương thức static 0 thể gọi được các biến không phải là static
+    // Ví dụ biến y là instance variable: thuộc về 1 đối tượng cố định thì hàm static sẽ 0 dùng được
+    
+    // Chung quy: 
+    // Static method khó tính, nó chỉ có thể gọi được các biến static, các phương thức static khác
+    // instance method có thể gọi được all
+}
