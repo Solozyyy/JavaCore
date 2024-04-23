@@ -1,0 +1,44 @@
+package basic1;
+
+import java.util.*;
+
+public class Sinhvien {
+    private String hoTen;
+    //class: Kiểu tham chiếu
+    public Sinhvien(String name){
+        this.hoTen = name;
+    }
+    
+    public void setName(String name){
+        this.hoTen = name;
+    }
+    
+    public String getName(){
+        return this.hoTen;
+    }
+    
+    public static void thayDoi(Sinhvien s){
+        s.setName("oi oi oi");
+    }
+    
+    public static void main(String[] args) {
+        Sinhvien sv1 = new Sinhvien("Cuc ky vui ve");
+        Sinhvien sv2 = new Sinhvien("Deo vui ve");
+        // Lúc này 2 ô nhớ có dạng Sinhvien được tạo là "Cuc ky vui ve" và "Deo vui ve"
+        // sv1 và sv2 lúc này lưu 2 tham chiếu đến 2 đối tượng Sinhvien đã được tạo như trên
+        sv2 = sv1;
+        // Sau khi gán như này thì sv1 sẽ gán tham chiếu đến vùng nhớ mà sv1 đang quản lý
+        // Lúc này sv1 và sv2 sẽ cùng lưu tham chiếu vào ô nhớ có dữ liệu "Cuc ky vui ve"
+        
+        System.out.println(sv1.getName() + " " + sv2.getName());
+        
+        thayDoi(sv1);
+        //Lúc này nhớ lại trong java ko có pass by reference, chỉ có pass by value, nhưng 
+        //ở trường hợp này value được truyền vào hàm là 1 reference nên sv1 lúc này sẽ
+        //lưu tham chiếu đến ô nhớ có dữ liệu "oi oi oi" thì sv2 cũng sẽ thay đổi theo sv1
+        
+        System.out.println(sv1.getName() + " " + sv2.getName());
+    }
+    
+}
+
