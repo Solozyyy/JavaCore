@@ -1,0 +1,204 @@
+package basic1;
+
+import java.util.Scanner;
+import Utility.StringUtility;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+// Encapsulation: Đóng gói dữ liệu
+// Inheritance: Kế thừa
+// Polymophism: Đa hình
+// Abstraction: Trừu tượng (Cái này tranh cãi chỗ nói có chỗ nói 0)
+
+// Superclass: lớp cha / General class: Lớp chung
+// Các constructor được tạo từ lớp cha rồi mới đến lớp con
+
+// Overriding: Kế thừa (Ghi đè): Cùng tên cùng tham số cùng kiểu trả về ở các lớp cha, con
+// Override nó sẽ gọi từ lớp con bé nhất đến lớp cha
+
+// Overloading: Nạp chồng: Các phương thức cùng tên nhưng khác kiểu tham số, khác kiểu trả về, khác số lượng tham số
+
+// Tóm tắt: inheritance
+// Lớp cha, lớp con
+// super: Gọi constructor của lớp cha cũng như gọi các phương thức của lớp cha
+// constructor Chaining: Nó khởi tạo đối tượng của lớp cha rồi mới đến lớp con
+// Phân biệt overriding và overloading
+
+// Visibility, modifier, accessibility
+// 3 cái trên là việc lớp con có thể truy cập trực tiếp vào các thuộc tính của lớp cha hay 0
+// Ví dụ bth khai báo là private đổi thành protected thì ở lớp con hoàn toàn có thể dùng this.thuộc_tính của lớp cha 
+
+public class Learn{
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Teacher t = new Teacher();
+        Teacher st = new Teacher("CNTT", "Hai", StringUtility.chuanHoaNgay("1/2/2002"), "Ha Noi", 20000000);
+        System.out.println(st);
+    
+    }      
+}
+//
+// class person
+//
+
+package basic1;
+
+import java.util.*;
+
+public class Person {
+    private String name;
+    private String birth;
+    private String address;
+    
+    public Person(){
+        System.out.println("F");
+    }
+
+    public Person(String name, String birth, String address) {
+        this.name = name;
+        this.birth = birth;
+        this.address = address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+//Override    
+    public String toString(){
+        return "P: " + this.name + " " + this.birth + " " + this.address;
+    }
+    
+}
+
+//
+// class Student
+//
+
+
+package basic1;
+
+//Trong java không có tính đa kế thừa
+//Nhưng trong java có tính kế thừa nhiều mức (Hierarchical inheritance)
+
+public class Student extends Person{    
+    private String className;
+    private double gpa;
+
+    public Student(String className, double gpa, String name, String birth, String address){
+        super(name, birth, address); // Gọi constructor của lớp cha và truyền 3 tham số vào
+        this.className = className;
+        this.gpa = gpa;
+        
+    } 
+
+    public String getClassName() {
+        return className;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+    // Lớp con không thể truy cập vào các thông tin của lớp super mà phải thông qua super.hàm_cần_gọi
+    // Hoặc là dùng super.get_dữ_liệu từ lớp super để lấy dữ liệu
+    // Nếu muốn truy cập bằng phương thức this thì dùng protected ở lớp cha để khai báo biến thì ở lớp con sẽ dùng được this.tên_biến
+    public String toString(){
+        return super.toString() + " " + this.className + " " + this.className + " " + String.format("%.02f", this.gpa);
+    }
+}
+
+//
+// class Employee
+//
+
+package basic1;
+
+public class Employee extends Person{
+    public double salary;
+
+    public Employee(){
+        System.out.println("u");
+    }
+    
+    public Employee(double salary, String name, String birth, String address) {
+        super(name, birth, address);
+        this.salary = salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+//Override 
+    public String toString(){
+        return "E: " + super.toString() + " " + String.format("%.02f", salary);
+    }
+}
+
+//
+// class Teacher
+//
+package basic1;
+
+// Nếu muốn kế thừa từ 2 lớp trở lên thì lớp ngay trước lớp muốn kế thừa phải tạo 1 Constructor không tham số
+public class Teacher extends Employee{
+    private String faculty;
+    
+    public Teacher(){
+        System.out.println("ck");
+    }
+    
+    public Teacher(String falcuty, String name, String birth, String address, double salary){
+        super(salary, name, birth, address);
+        this.faculty = falcuty;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+    
+// Override
+    public String toString(){
+        return "T: " + super.toString() + " " + this.faculty;
+    }
+}
+
+
+
