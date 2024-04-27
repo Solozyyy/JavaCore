@@ -16,7 +16,7 @@ import java.util.Comparator;
 // Các constructor được tạo từ lớp cha rồi mới đến lớp con
 
 // Overriding: Kế thừa (Ghi đè): Cùng tên cùng tham số cùng kiểu trả về ở các lớp cha, con
-// Override nó sẽ gọi từ lớp con bé nhất đến lớp cha
+// Override nó sẽ gọi từ lớp con bé nhất đến lớp cha, không cho phép override phương thức static của lớp 
 
 // Overloading: Nạp chồng: Các phương thức cùng tên nhưng khác kiểu tham số, khác kiểu trả về, khác số lượng tham số
 
