@@ -29,14 +29,23 @@ import java.util.Comparator;
 // Visibility, modifier, accessibility
 // 3 cái trên là việc lớp con có thể truy cập trực tiếp vào các thuộc tính của lớp cha hay 0
 // Ví dụ bth khai báo là private đổi thành protected thì ở lớp con hoàn toàn có thể dùng this.thuộc_tính của lớp cha 
+// Tự tạo 1 class có chức năng sắp xếp để truyền vào hàm sort tránh anonymous comparator trong hàm gây đến dài dòng và xấu
 
 public class Learn{
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Teacher t = new Teacher();
-        Teacher st = new Teacher("CNTT", "Hai", StringUtility.chuanHoaNgay("1/2/2002"), "Ha Noi", 20000000);
-        System.out.println(st);
+        int n = Integer.parseInt(sc.nextLine());
+        ArrayList<Student> p = new ArrayList<>();
+        for(int i = 0; i < n; ++i){
+            String name = sc.nextLine();
+            String birth = sc.nextLine();
+            String address = sc.nextLine();
+            String className = sc.nextLine();
+            double gpa = Double.parseDouble(sc.nextLine());
+            p.add(new Student(className, gpa, name, StringUtility.chuanHoaNgay(birth), address));
+        }
+        Collections.sort(p, new SortByGPA());
     
     }      
 }
@@ -198,6 +207,23 @@ public class Teacher extends Employee{
     public String toString(){
         return "T: " + super.toString() + " " + this.faculty;
     }
+
+//
+//Class SortByGPA
+//
+package basic1;
+
+import java.util.Comparator;
+
+public class SortByGPA implements Comparator<Student>{
+
+    public int compare(Student o1, Student o2) {
+        if(o1.getGpa() > o2.getGpa()) return -1;
+        else return 1;
+    }
+    
+}
+
 }
 
 
