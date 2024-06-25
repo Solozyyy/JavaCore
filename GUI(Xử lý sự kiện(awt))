@@ -1,0 +1,47 @@
+
+package GUI;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.util.Scanner;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+//label: Nhãn
+//jtextfield: Nhập
+
+public class GUI2 {
+   public static void main(String[] args){
+       JFrame frame = new JFrame();
+       frame.setSize(500,500);
+       JTextField jtf = new JTextField();
+       jtf.setBounds(250,100,150,30);
+       
+       JLabel jbl1 = new JLabel();
+       jbl1.setText("Nhap so:");
+       jbl1.setBounds(120, 100, 150, 30);
+       
+       JLabel jbl2 = new JLabel();
+       jbl2.setBounds(200, 200, 250, 30);
+       JButton btn = new JButton();
+       btn.setBounds(200,150,100,30);
+       btn.setText("Click");       
+       btn.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){
+               jbl2.setText(jtf.getText());
+               String tmp = jbl2.getText();
+               System.out.println(tmp);
+           }
+       });
+       frame.add(btn);       
+       frame.add(jtf);
+       frame.add(jbl1);
+       frame.add(jbl2);
+       frame.setLayout(null);
+       frame.setLocationRelativeTo(frame);
+       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       frame.setVisible(true);
+   } 
+}
+
