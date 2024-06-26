@@ -1,0 +1,98 @@
+
+package GUI;
+
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class login {
+    public static void main(String[] agrs){
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        ArrayList<account> list = new ArrayList<>();
+        for(int i = 0; i < n; ++i){
+            String hoTen = sc.nextLine();
+            String un = sc.nextLine();
+            String pw = sc.nextLine();
+            String pos = sc.nextLine();
+            list.add(new account(hoTen, un, pw, pos));
+        }
+        
+        JLabel jbl1 = new JLabel();
+        JLabel jbl2 = new JLabel();
+        jbl1.setText("Tài khoản");
+        jbl1.setBounds(50, 100, 150, 30);
+        jbl2.setText("Mật khẩu");
+        jbl2.setBounds(50, 150, 150, 30);
+        JTextField Account = new JTextField();
+        Account.setBounds(150, 100, 150, 30);
+        JPasswordField password1 = new JPasswordField();
+        password1.setBounds(150, 150, 150, 30);
+        JFrame frame = new JFrame();
+        frame.setTitle("ok");
+        frame.setSize(400,400);
+        
+        JButton btnLogin = new JButton();
+        btnLogin.setText("Login");
+        btnLogin.setBounds(150, 200, 150, 30);
+        JLabel checkLog = new JLabel();
+        checkLog.setBounds(150, 250, 150, 30);
+        btnLogin.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){
+               String acc = Account.getText();
+               String pass = password1.getText();
+               boolean ok = false;
+               for(int i = 0; i < n; ++i){
+                   if(list.get(i).checkLogin(acc, pass)) {
+                       ok = true;
+                       break;
+                   }
+               }
+               if(ok) checkLog.setText("Đăng nhập thành công");
+               else checkLog.setText("Đăng nhập thất bại");
+           } 
+        });
+        
+        frame.add(password1);
+        frame.add(jbl1);
+        frame.add(jbl2);
+        frame.add(Account);
+        frame.add(btnLogin);
+        frame.add(checkLog);
+        frame.setLocationRelativeTo(frame);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+}
+
+// Bên class account
+
+
+package GUI;
+
+public class account{
+    private String hoTen;
+    private String username;
+    private String password;
+    private String position;
+    
+    public account(String hoTen, String username, String password, String position){
+        this.hoTen = hoTen;
+        this.username = username;
+        this.password = password;
+        this.position = position;
+    }
+    
+    public boolean checkLogin(String username, String password){
+        if(this.username.equals(username) && this.password.equals(password)) 
+            return true;
+        return false;
+    }
+}
