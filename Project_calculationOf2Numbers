@@ -1,0 +1,105 @@
+
+package GUI;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class SumOfTwoNumbers {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.setTitle("Các phép tính với 2 số");
+        frame.setSize(400,400);
+        
+        JLabel jbl1 = new JLabel();
+        jbl1.setText("Nhap so a");
+        jbl1.setBounds(100, 50, 100, 30);
+        JLabel jbl2 = new JLabel();
+        jbl2.setText("Nhap so b");
+        jbl2.setBounds(100, 100, 100, 30);
+        JLabel jbl3 = new JLabel();
+        
+        JTextField jtf1 = new JTextField();
+        jtf1.setBounds(200, 50, 100, 30);
+        JTextField jtf2 = new JTextField();
+        jtf2.setBounds(200, 100, 100, 30);
+        
+        //Cộng
+        JButton btnP = new JButton();
+        btnP.setText("+");
+        btnP.setBounds(50, 150, 50, 30);
+        jbl3.setBounds(135, 200, 300, 30);
+        btnP.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                String tmp1 = jtf1.getText();
+                String tmp2 = jtf2.getText();
+                int n1 = Integer.parseInt(tmp1);
+                int n2 = Integer.parseInt(tmp2);
+                int n = n1 + n2;
+                String tmp = Integer.toString(n);
+                jbl3.setText("Tổng 2 số bằng = " + tmp);
+            }
+        });
+        
+        //Trừ
+        JButton btnM = new JButton();
+        btnM.setText("-");
+        btnM.setBounds(115, 150, 50, 30);
+        btnM.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){
+               String tmp1 = jtf1.getText();
+               String tmp2 = jtf2.getText();
+               int n1 = Integer.parseInt(tmp1);
+               int n2 = Integer.parseInt(tmp2);
+               jbl3.setText("Hiệu 2 số = " + Integer.toString(n1 - n2));
+           } 
+        });
+        
+        //Nhân
+        JButton btnMul = new JButton();
+        btnMul.setText("x");
+        btnMul.setBounds(180, 150, 50, 30);
+        btnMul.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                String tmp1 = jtf1.getText();
+                String tmp2 = jtf2.getText();
+                int n1 = Integer.parseInt(tmp1);
+                int n2 = Integer.parseInt(tmp2);
+                jbl3.setText("Tích 2 số = " + Integer.toString(n1 * n2));
+            }
+        });
+        
+        //Chia
+        JButton btnD = new JButton();
+        btnD.setText("/");
+        btnD.setBounds(245, 150, 50,30);
+        btnD.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){
+               String tmp1 = jtf1.getText();
+               String tmp2 = jtf2.getText();
+               int n1 = Integer.parseInt(tmp1);
+               int n2 = Integer.parseInt(tmp2);
+               if(n2 == 0) jbl3.setText("Nhập lại số b đi thằng lồn");
+               else jbl3.setText("Thương 2 số = " + Integer.toString(n1 / n2));
+           } 
+        });
+                
+        frame.add(jbl1);
+        frame.add(jbl2);
+        frame.add(jtf1);
+        frame.add(jtf2);
+        frame.add(btnP);
+        frame.add(btnM);
+        frame.add(btnMul);
+        frame.add(btnD);
+        frame.add(jbl3);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(frame);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    }
+}
