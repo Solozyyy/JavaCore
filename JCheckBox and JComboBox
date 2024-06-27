@@ -1,0 +1,78 @@
+
+package GUI;
+import javax.swing.JTextArea;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.TreeSet;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+
+//addItemListener
+//itemStateChanged(ItemEvent e)
+//JRadioButton: Giống JCheckBox chỉ khác hình dạnh
+//JComboBox: Set up dữ liệu là mảng
+
+public class TextArea {
+    public static void main(String[] agrs){
+        JCheckBox check1 = new JCheckBox("JAVA");
+        check1.setBounds(30, 100, 100, 30);
+        JCheckBox check2 = new JCheckBox("C++");
+        check2.setBounds(30, 150, 100, 30);
+        
+        JLabel jbl1 = new JLabel();
+        JLabel jbl2 = new JLabel();
+        jbl1.setBounds(30, 200, 100, 30);
+        jbl2.setBounds(30, 250, 100, 30);
+        check1.addItemListener(new ItemListener(){
+            public void itemStateChanged(ItemEvent e){
+                if(e.getStateChange() == ItemEvent.SELECTED){
+                    jbl1.setText("JAVA");
+                }
+                else {
+                    jbl1.setText("");
+                }
+            }
+        });
+        
+        check2.addItemListener(new ItemListener(){
+            public void itemStateChanged(ItemEvent e){
+                if(e.getStateChange() == ItemEvent.SELECTED){
+                    jbl2.setText("C++");
+                }
+                else {
+                    jbl2.setText("");
+                }
+            }
+        });
+        
+        String[] arr = {"JAVA", "C++", "PYTHON", "JS"};
+        JComboBox comboBox = new JComboBox(arr);
+        comboBox.setBounds(30, 100, 100, 50);
+        
+        JLabel jbl3 = new JLabel();
+        jbl3.setBounds(30, 150, 100, 75);
+        comboBox.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                int pos = comboBox.getSelectedIndex();
+                jbl3.setText(arr[pos]);
+            }
+        });
+        JFrame frame = new JFrame();
+        frame.setSize(500,500);
+        frame.add(check1);
+        frame.add(check2);
+        //frame.add(comboBox);
+        frame.add(jbl1);
+        frame.add(jbl2);
+        //frame.add(jbl3);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(frame);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
