@@ -1,0 +1,79 @@
+
+package GUI;
+import javax.swing.JTextArea;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.BadLocationException;
+
+//setLineWrap: Cho phép xuống dòng
+//setWrapStyleWord: Xuống dòng mà không cắt từ
+//jta.getText(): Đọc hết tất cả các dòng
+
+public class TextArea {
+    public static void main(String[] agrs){
+        //textArea
+        JTextArea jta = new JTextArea(50, 10);
+        jta.setBounds(30,100, 200, 200);
+        jta.setLineWrap(true);
+        jta.setWrapStyleWord(true);
+        
+        //button
+        JButton btn = new JButton();
+        btn.setText("count");
+        btn.setBounds(30, 325, 100, 30);
+        
+        //frame
+        JFrame frame = new JFrame();
+        frame.setSize(500, 500);
+        frame.add(jta);
+        JButton btn1 = new JButton();
+        btn1.setBounds(150, 325, 200, 30);
+        btn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                TreeSet tree = new TreeSet<>();
+                System.out.println(jta. getLineCount());
+                int n = jta.getLineCount();
+                String[] arr = new String[n];
+                String s = jta.getText();
+                for(int i = 0; i < n; ++i){
+                    int pos1 = -1, pos2 = -1;
+                    String tmp = "";
+                    try {
+                        pos1 = jta.getLineStartOffset(i);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(TextArea.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        pos2 = jta.getLineEndOffset(i);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(TextArea.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    arr[i] = s.substring(pos1, pos2);
+                    for(char x : arr[i].toCharArray()){
+                        if(x != ' '){
+                            tmp += x;
+                        }
+                        else{
+                            tree.add(tmp);
+                            tmp = "";                            
+                        }
+                    }
+                    tree.add(tmp);
+                }
+                //System.out.println(jta.getText());
+                btn1.setText(Integer.toString(tree.size()));
+            }
+        });
+        frame.add(btn1);
+        frame.add(btn);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(frame);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
