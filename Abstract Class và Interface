@@ -1,0 +1,65 @@
+//Abstract: Trừu tượng 
+//Abstract không thể tự khởi tạo chính nó mà phải thông qua những lớp con để khởi tạo lớp abstract cha
+//Interface: Tất cả những thuộc tính trong Inerface đểu mặc định là abstract
+//1 class có thể implements được nhiều interface nhưng chỉ có thể extends được duy nhất 1 abstract class
+
+package basic1;
+
+public class Learn{
+    
+    public static void main(String[] args) {
+        Cho cho = new Cho();
+        cho.Ngu();
+        cho.Keu();
+        cho.bonChan();
+        cho.hat();
+    }
+    
+}
+
+//Bên abstract class DongVat
+
+package basic1;
+
+abstract class DongVat {
+    public void Ngu(){
+        System.out.println("Ngu");
+    }
+    abstract void Keu();
+}
+
+//Bên class Cho
+
+package basic1;
+
+public class Cho extends DongVat implements conThu, Hat{
+    public void Keu(){
+        System.out.println("Gau gau");
+    }
+    public void bonChan(){
+        System.out.println("con cho co 4 chan");
+    }
+    public void hat(){
+           System.out.println("hehehehe");
+    }
+    
+}
+
+//Bên interface conThu
+
+package basic1;
+
+//mặc định các thuộc tính trong interface sẽ là abstract
+
+interface conThu {
+    void bonChan();
+}
+
+//Bên interface 
+
+package basic1;
+
+interface Hat {
+    void hat();
+}
+
