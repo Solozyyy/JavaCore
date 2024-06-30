@@ -1,0 +1,96 @@
+import java.util.Scanner;
+import java.util.*;
+
+//So sánh nội dung xâu mà dùng == thì là đang so sánh 2 object
+//Nếu so sánh nội dung thì dùng equals hoặc compareTo
+//So sánh nội dung không xét đến tính chất in hoa in thường thì dùng compareToIgnoreCase
+//charAt: Lấy ra ký tự ở vị trí
+//Cắt xâu thì dùng substring(start_index, end_index - 1)
+//Có thể dùng contains để kiếm tra xâu con có nằm trong xâu ban đầu 0
+//replace dùng để thay thế phần tử trong xâu. VD:
+// String s = "1234566789";
+// s = s.replace("9", "abc");
+// output: 12345678abc
+//char[] a = s.toCharArray(), chuyển xâu về mảng ký tự
+//Tách xâu sẽ dùng split, nó sẽ trả về mảng các từ trong sâu
+//split("\\s+") tách xâu có nhiều dấu cách
+//StringBuilder: Là 1 lớp nó cung cấp 1 chuỗi ký tự có thể thay đổi(Thêm, chèn, thay thế hoặc xóa)
+//insert(), replace(), reverse(), append(), deleteCharAt()
+//Scanner sc = new Scanner(System.in);
+//String s = sc.nextLine();
+//StringBuilder string = new StringBuilder(s);
+//string.deleteCharAt(string.length()-1);
+//System.out.println(string);
+//string.append("Di choii");
+//System.out.println(string.reverse().toString());
+//StringTokenizer: Tách các từ ra và xử lý
+//hasMoreTokens: Tách đến khi không còn ký tự
+//Chuyen noi dung xau ve 1 lop Wrapper int n = Integer.parseInt(s);
+//Chuyen 1 lop Wrapper ve 1 xau ky tu String x = "" + 12345;
+//Lop Character
+//Kiem tra 1 ky tu co phai so hay khong Character.isDigit(char)
+//Kiem tra 1 ky tu co phai chu hay khong Character.isAlphabetic(char)
+//Bài tập in ra ký tự trùng trong 2 xâu và ký tự chỉ xuất hiện ở 1 trong 2 xâu
+public class Learn {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.nextLine();
+        String s2 = sc.nextLine();
+        char[] c1 = s1.toCharArray();
+        char[] c2 = s2.toCharArray();
+        Set<String> se = new TreeSet<String>();
+        for (char x : c1) {
+            if (s2.contains(x + "") == true) {
+                se.add(x + "");
+            }
+        }
+        for (String it : se) {
+            System.out.print(it);
+        }
+        System.out.println("");
+        Map<String, Integer> map1 = new HashMap<String, Integer>();
+        Map<String, Integer> map2 = new HashMap<String, Integer>();
+        for (char x : c1) {
+            if (map1.containsKey(x + "")) {
+                int fre = map1.get(x + "");
+                map1.put(x + "", fre + 1);
+            } else {
+                map1.put(x + "", 1);
+            }
+        }
+        for (char x : c2) {
+            if (map2.containsKey(x + "")) {
+                int fre = map2.get(x + "");
+                map2.put(x + "", fre + 1);
+            } else {
+                map2.put(x + "", 1);
+            }
+        }
+        String s3 = "";
+        //List<Map.Entry<String, Integer>> tmpMap1 = new LinkedList<>(map1.entrySet());
+        //List<Map.Entry<String, Integer>> tmpMap2 = new LinkedList<>(map2.entrySet());
+        for (Map.Entry<String, Integer> it : map1.entrySet()) {
+            if (map2.containsKey(it.getKey())) {
+                for (int i = 0; i < Math.abs(it.getValue() - map2.get(it.getKey())); ++i) {
+                    s3 += it.getKey();
+                }
+            }
+            else if (map2.containsKey(it.getKey()) == false) {
+                s3 += it.getKey();
+            }
+        }
+        for (Map.Entry<String, Integer> it : map2.entrySet()) {
+            if(map1.containsKey(it.getKey()) == false){
+                s3 += it.getKey();
+            }
+        }
+        char[] c3 = s3.toCharArray();
+        Arrays.sort(c3);
+        for(char x : c3){
+            System.out.print(x);
+        }
+    }
+}
+//bUJtZSoONh
+//nTOhOGvRBk
