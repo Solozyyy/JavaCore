@@ -1,0 +1,150 @@
+
+package connecttomysql;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ConnectToMySQL {
+
+    public static void main(String[] args) throws Exception{
+        //msv, ht, dc, lop, gpa
+        //st,  st, st, st,  dou
+        //insertVal();
+        //insertUsingPst();
+        //delete();
+        //update();
+        //getAllStudentsThroughStoredProcedure();
+        //abc();
+        commitandrollback();
+    }
+    
+    public static void commitandrollback() throws Exception{
+        //commit dùng để thay đổi vĩnh viễn dữ liệu
+        //rollback dùng để kiểm tra nếu không khớp dữ liệu thay đổi thì sẽ quay lại
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        
+        String query1 = "UPDATE SinhVien SET gpa = 3 WHERE ma_sinh_vien = 'SV002'";
+        String query2 = "UPDATE SinhVien SET gpa = 3 WHERE ma_sinh_vien = 'SV010'";
+        String query3 = "UPDATE SinhVien SET gpa = 3.3 WHERE ma_sinh_vien = 'SV001'";
+        String query4 = "UPDATE SinhVien SET gpa = 3 WHERE ma_sinh_vien = 'SV003'";
+        
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement st = con.createStatement();
+        
+        con.setAutoCommit(false);
+        st.addBatch(query1);
+        st.addBatch(query2);
+        st.addBatch(query3);
+        st.addBatch(query4);
+        
+        int[] ans = st.executeBatch();
+        
+        for(int i : ans){
+            if(i > 0) continue;
+            else con.rollback();
+        }
+        con.commit();
+        con.close();
+        
+    }
+    
+    public static void abc() throws Exception{
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        
+        Connection con = DriverManager.getConnection(url, user, pass);
+        CallableStatement cst = con.prepareCall("{CALL GetAllStudent()}");
+        ResultSet rs = cst.executeQuery();
+        while(rs.next()){
+            System.out.println(rs.getString(1) + " | " + rs.getString(2));
+        }
+        con.close();
+        
+    }
+    
+    public static void getAllStudentsThroughStoredProcedure() throws Exception{
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        
+        Connection con = DriverManager.getConnection(url, user, pass);
+        CallableStatement cst = con.prepareCall("{CALL GetAllStudents()}");
+        ResultSet rs = cst.executeQuery();
+        while(rs.next()){
+            System.out.println(rs.getString(1) + " | " + rs.getString(2) + " | " + rs.getString(3));
+        }
+        
+        con.close();
+    }
+    
+    public static void delete() throws Exception{
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        
+        String query = "DELETE FROM SinhVien WHERE lop = 'Hai Phong'";
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement st = con.createStatement();
+        int rows = st.executeUpdate(query);
+        System.out.println("rows affected: " + rows);
+        con.close();
+    }
+    
+    public static void update() throws Exception{
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        
+        String query = "UPDATE SinhVien SET ho_ten = 'Dinh Cong Hoan' WHERE ma_sinh_vien = 'SV002'";
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement st = con.createStatement();
+        int rows = st.executeUpdate(query);
+        System.out.println("rows affected: " + rows);
+        con.close();
+    }
+    
+    public static void insertUsingPst() throws Exception{
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        
+        String msv = "SV011";
+        String ten = "Tran Hoai Linh";
+        String dc = "Hai Phong";
+        String lop = "CNTT3";
+        double gpa = 3.4;
+        
+        String query = "INSERT INTO SinhVien VALUES(?,?,?,?,?)";
+        
+        Connection con = DriverManager.getConnection(url, user, pass);
+
+        PreparedStatement pst = con.prepareStatement(query);
+        pst.setString(1, msv);
+        pst.setString(2, ten);
+        pst.setString(3, dc);
+        pst.setString(4, lop);
+        pst.setDouble(5, gpa);
+        int rows = pst.executeUpdate();
+        System.out.println("rows add: " + rows);
+        con.close();
+
+    }
+    
+    public static void insertVal() throws Exception{
+        String url = "jdbc:mysql://localhost:3306/StudentManagement";
+        String user = "root";
+        String pass = "Khoaptit123.";
+        String query = "INSERT INTO SinhVien VALUES('SV010', 'Nguyen An', 'Thach That', 'CNTT1', 3.2)";
+        
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement st = con.createStatement();
+        int rows = st.executeUpdate(query);
+        System.out.println("Number of rows affected: " + rows);
+        
+        con.close();
+    }
+    
+}
