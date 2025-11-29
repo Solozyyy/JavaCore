@@ -1,0 +1,47 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package jvcore;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Jvcore {
+
+  
+    public static void main(String[] args) throws InterruptedException {
+        //1 thread
+        Thread t = new Thread(() -> {
+            System.out.println("Thread is running");
+        });
+        t.start();
+        t.sleep(5000);
+        String res = "hello world";
+        //chờ t chạy xong hoàn toàn
+        t.join();
+        System.out.println(res);
+        // nhược: không tối ưu. Ví dụ: có 2000 request -> tạo 2000 thread -> ngáo
+        // dùng thread pool để xử lý song song + giới hạn thread
+        // tạo pool fix cứng 10 thread
+        ExecutorService pool =  Executors.newFixedThreadPool(10);
+        
+        for(int i = 0; i < 100; ++i){
+            int id = i;
+            pool.submit(() -> {
+                System.out.println("Thread number: " + id + " is running at " + Thread.currentThread().getName());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Jvcore.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        
+        
+    }
+    
+}
